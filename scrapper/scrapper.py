@@ -1,8 +1,9 @@
 import json
 
 import requests
-from bs4 import BeautifulSoup
 import utils as u
+from bs4 import BeautifulSoup
+
 
 class Prediction(object):
     side = 'neutral'
@@ -13,6 +14,8 @@ class Prediction(object):
     ticker = f'{symbol}/{mainmarket}'
     volume_in_float = 0.0
     volume = f'{volume_in_float} {mainmarket}'
+
+
 URL = "https://xypher.io/Remote/API/MVP/WS/SignalHistory/{}/{}"
 
 
@@ -72,11 +75,17 @@ def get_prediction(exchange='Binance', page=1):
         time = float(prediction[u.NEW_UNIX]) - float(prediction[u.OLD_UNIX])
 
         return_prediction['side'] = side
+        return_prediction['symbol'] = prediction[u.COIN_NAME]
         return_prediction['time'] = time
         return_prediction['volume'] = float(prediction[u.VOLUME])
+        return_prediction['base market'] = prediction[u.MAIN_MARKET]
+        return_prediction['exchange'] = exchange
+        return_prediction['24H Vol'] = float(prediction[u.NEW_VOL])
+        return_prediction['vol diff %'] = float(prediction[u.VOL_DIFF])
+
         predictions.append(return_prediction)
-    return return_prediction
+    return predictions
 
 
 if __name__ == "__main__":
-    print(parse())
+    print(get_prediction())
