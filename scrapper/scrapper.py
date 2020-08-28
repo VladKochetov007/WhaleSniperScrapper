@@ -75,4 +75,4 @@ def get_prediction(exchange='Binance', page=1):
 
 
 if __name__ == "__main__":
-    print(get_prediction())
+    print(get_prediction(exchange='Huobi'))
