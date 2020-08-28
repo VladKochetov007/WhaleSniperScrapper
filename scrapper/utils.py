@@ -1,3 +1,6 @@
+from binance.client import Client
+
+
 MOONY = 'moony'
 REKT = 'rekt'
 NEUT = 'neut'
@@ -11,3 +14,7 @@ NEW_VOL = 'NewVol'
 VOL_DIFF = 'VolDiff'
 MARKET_NAME = 'MarketName'
 ID = 'id'
+
+def get_binance_price(symbol):
+    client = Client()
+    return float(client.get_symbol_ticker(symbol=symbol)['price'])
