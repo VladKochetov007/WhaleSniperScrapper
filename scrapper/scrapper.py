@@ -42,9 +42,6 @@ def get_prediction(exchange='Binance', page=1):
     :type exchange: str
     :return: simplified form of original signals
 
-    side: prediction side
-    time: time in seconds
-
     """
     original = parse(exchange=exchange, page=page)
     predictions = []
@@ -70,6 +67,8 @@ def get_prediction(exchange='Binance', page=1):
         return_prediction['exchange'] = exchange
         return_prediction['24H Vol'] = float(prediction[u.NEW_VOL])
         return_prediction['vol diff %'] = float(prediction[u.VOL_DIFF])
+        return_prediction['currency pair'] = prediction[u.MARKET_NAME]
+        return_prediction['id'] = int(prediction[u.ID])
 
         predictions.append(return_prediction)
     return predictions
