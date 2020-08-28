@@ -1,0 +1,8 @@
+*/__pycache__
+*.log
+MANIFEST
+build
+dist
+.pypirc
+quick_trade.egg-info
+*.json
