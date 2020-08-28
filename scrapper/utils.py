@@ -1,0 +1,7 @@
+MOONY = 'moony'
+REKT = 'rekt'
+NEUT = 'neut'
+TREND = 'trend'
+OLD_UNIX = 'OldUnix'
+NEW_UNIX = 'NewUnix'
+VOLUME = 'Amount'
