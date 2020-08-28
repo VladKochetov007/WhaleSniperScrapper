@@ -4,18 +4,6 @@ import requests
 import utils as u
 from bs4 import BeautifulSoup
 
-
-class Prediction(object):
-    side = 'neutral'
-    time = '1m'
-    exchange = 'Binance'
-    mainmarket = 'USDT'
-    symbol = 'MATIC'
-    ticker = f'{symbol}/{mainmarket}'
-    volume_in_float = 0.0
-    volume = f'{volume_in_float} {mainmarket}'
-
-
 URL = "https://xypher.io/Remote/API/MVP/WS/SignalHistory/{}/{}"
 
 
