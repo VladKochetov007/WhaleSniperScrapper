@@ -99,11 +99,11 @@ def trade(prediction, min_volume=100, max_time=5):
     vol_time = min_volume / max_time
     curr_coef = volume / (prediction['time'] * 60)
     if curr_coef > vol_time:
-        print(f'trade {prediction["side"]}, {prediction["symbol"]}, base:{prediction["base market"]}')
+        return f'trade {prediction["side"]}, {prediction["symbol"]}, base:{prediction["base market"]}'
 
 
 if __name__ == "__main__":
     print(get_prediction())
-    for i in range(1, 4000):
+    for i in range(1, 40):
         for pred in get_prediction(page=i):
-            trade(prediction=pred, min_volume=1, max_time=209876543212345678)
+            print(trade(prediction=pred, min_volume=50, max_time=5))
