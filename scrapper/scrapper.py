@@ -1,3 +1,7 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+
 import json
 
 import binance
@@ -52,11 +56,11 @@ def get_prediction(exchange='Binance', page=1):
         side = prediction[u.TREND]
 
         if side == u.MOONY:
-            side = 'buy'
+            side = "buy"
         elif side == u.NEUT:
-            side = 'neutral'
+            side = "neutral"
         elif side == u.REKT:
-            side = 'sell'
+            side = "sell"
 
         time = float(prediction[u.NEW_UNIX]) - float(prediction[u.OLD_UNIX])
 
@@ -87,19 +91,21 @@ def trade(prediction, min_volume=100, max_time=5):
 
     """
 
-    if prediction["base market"] == 'BTC':
+    if prediction["base market"] == "BTC":
         volume_coef = 1
     else:
         try:
-            volume_coef = u.get_binance_price(f'{prediction["base market"]}BTC')
+            volume_coef = u.get_binance_price(f"{prediction['base market']}BTC")
         except binance.exceptions.BinanceAPIException:
-            volume_coef = 1 / u.get_binance_price(f'BTC{prediction["base market"]}')
+            volume_coef = 1 / u.get_binance_price(f"BTC{prediction['base market']}")
 
     volume = prediction['volume'] * volume_coef
     vol_time = min_volume / max_time
-    curr_coef = volume / (prediction['time'] * 60)
+    curr_coef = volume / (prediction["time"] * 60)
     if curr_coef > vol_time:
         return f'trade {prediction["side"]}, {prediction["symbol"]}, base:{prediction["base market"]}'
+    else:
+        return "not match"
 
 
 if __name__ == "__main__":
