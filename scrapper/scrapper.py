@@ -80,8 +80,9 @@ def get_prediction(exchange='Binance', page=1):
     return predictions
 
 
-def trade(prediction, min_volume=100, max_time=5):
+def trade(prediction, min_volume=100, max_time=5, return_meta=False):
     """
+    :param return_meta: for convenient API management
     :param max_time: maximum time in mitutes for signal
     :type max_time: float
     :param min_volume: min volume in Bitcoin's for signal
@@ -103,9 +104,13 @@ def trade(prediction, min_volume=100, max_time=5):
     vol_time = min_volume / max_time
     curr_coef = volume / (prediction["time"] * 60)
     if curr_coef > vol_time:
-        return f'trade {prediction["side"]}, {prediction["symbol"]}, base:{prediction["base market"]}'
+        if not return_meta:
+            return f'trade {prediction["side"]}, {prediction["symbol"]}, base:{prediction["base market"]}'
+        else:
+            return prediction
     else:
-        return "not match"
+        if not return_meta:
+            return "not match"
 
 
 if __name__ == "__main__":
