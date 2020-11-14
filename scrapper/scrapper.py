@@ -101,8 +101,8 @@ def trade(prediction, min_volume=100, max_time=5, return_meta=False):
             volume_coef = 1 / u.get_binance_price(f"BTC{prediction['base market']}")
 
     volume = prediction['volume'] * volume_coef
-    vol_time = min_volume / max_time
-    curr_coef = volume / (prediction["time"] * 60)
+    vol_time = min_volume / (max_time*60)
+    curr_coef = volume / (prediction["time"])
     if curr_coef > vol_time:
         if not return_meta:
             return f'trade {prediction["side"]}, {prediction["symbol"]}, base:{prediction["base market"]}'
@@ -115,6 +115,6 @@ def trade(prediction, min_volume=100, max_time=5, return_meta=False):
 
 if __name__ == "__main__":
     print(get_prediction())
-    for i in range(1, 40):
+    for i in range(1, 4):
         for pred in get_prediction(page=i):
             print(trade(prediction=pred, min_volume=50, max_time=5))
