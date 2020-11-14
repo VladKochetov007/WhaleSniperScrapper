@@ -83,7 +83,7 @@ def get_prediction(exchange='Binance', page=1):
 def trade(prediction, min_volume=100, max_time=5, return_meta=False):
     """
     :param return_meta: for convenient API management
-    :param max_time: maximum time in mitutes for signal
+    :param max_time: maximum time in minutes for signal
     :type max_time: float
     :param min_volume: min volume in Bitcoin's for signal
     :type min_volume: float
